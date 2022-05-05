@@ -63,11 +63,11 @@ namespace BackHost.AccDB_Migrations
                 name: "DBBAckUps",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<short>(type: "smallint", nullable: false),
                     Create = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -80,9 +80,9 @@ namespace BackHost.AccDB_Migrations
                 name: "LogEntities",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<short>(type: "smallint", nullable: false),
                     Create = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EntityId = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -101,11 +101,11 @@ namespace BackHost.AccDB_Migrations
                 name: "Permissions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ParentPermissionId = table.Column<int>(type: "int", nullable: true),
+                    ParentPermissionId = table.Column<long>(type: "bigint", nullable: true),
                     Access = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<short>(type: "smallint", nullable: false),
                     Create = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -231,7 +231,7 @@ namespace BackHost.AccDB_Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PermissionId = table.Column<int>(type: "int", nullable: false),
+                    PermissionId = table.Column<long>(type: "bigint", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     EntityIds = table.Column<string>(type: "nvarchar(max)", nullable: false),

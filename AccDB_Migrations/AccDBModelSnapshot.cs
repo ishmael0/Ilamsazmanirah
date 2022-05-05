@@ -130,11 +130,11 @@ namespace BackHost.AccDB_Migrations
 
             modelBuilder.Entity("Core.DB.LogEntity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
@@ -146,8 +146,8 @@ namespace BackHost.AccDB_Migrations
                     b.Property<int>("EntityState")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<short>("Status")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -303,11 +303,11 @@ namespace BackHost.AccDB_Migrations
 
             modelBuilder.Entity("Core.Models.DBBAckUp", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
@@ -320,8 +320,8 @@ namespace BackHost.AccDB_Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<short>("Status")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -334,11 +334,11 @@ namespace BackHost.AccDB_Migrations
 
             modelBuilder.Entity("Core.Models.Permission", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Access")
                         .IsRequired()
@@ -347,11 +347,11 @@ namespace BackHost.AccDB_Migrations
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ParentPermissionId")
-                        .HasColumnType("int");
+                    b.Property<long?>("ParentPermissionId")
+                        .HasColumnType("bigint");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<short>("Status")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -380,8 +380,8 @@ namespace BackHost.AccDB_Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
+                    b.Property<long>("PermissionId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
