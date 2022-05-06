@@ -46,6 +46,7 @@ namespace BackHost.DBs
 
     }
     [SafeToGetAll]
+    [Index(nameof(Title), IsUnique = true)]
     public class City: BaseModelWithTitle
     {
 
