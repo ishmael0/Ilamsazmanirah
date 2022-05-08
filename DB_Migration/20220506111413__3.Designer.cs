@@ -4,6 +4,7 @@ using BackHost.DBs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackHost.DB_Migration
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20220506111413__3")]
+    partial class _3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,58 +50,6 @@ namespace BackHost.DB_Migration
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("BackHost.DBs.Organization", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("Create")
-                        .HasColumnType("datetime2");
-
-                    b.Property<short>("Status")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
-
-                    b.ToTable("Organizations");
-                });
-
-            modelBuilder.Entity("BackHost.DBs.SellMethod", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("Create")
-                        .HasColumnType("datetime2");
-
-                    b.Property<short>("Status")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
-
-                    b.ToTable("SellMethods");
-                });
-
             modelBuilder.Entity("BackHost.DBs.Vahed", b =>
                 {
                     b.Property<long>("Id")
@@ -114,7 +64,7 @@ namespace BackHost.DB_Migration
                     b.Property<int>("ArzesheKarshenasi")
                         .HasColumnType("int");
 
-                    b.Property<long?>("CityId")
+                    b.Property<long>("CityId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Code")
@@ -123,8 +73,8 @@ namespace BackHost.DB_Migration
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("DastgaheMoarrefiKonnande")
-                        .HasColumnType("bigint");
+                    b.Property<string>("DastgaheMoarrefiKonnande")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -180,14 +130,17 @@ namespace BackHost.DB_Migration
                     b.Property<string>("MadrakGhabli")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("NahveForoosh")
-                        .HasColumnType("bigint");
+                    b.Property<int>("NahveForoosh")
+                        .HasColumnType("int");
 
                     b.Property<string>("NameBahreBardar")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sanad")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SanadStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("SayerMostanadat")
                         .HasColumnType("nvarchar(max)");
@@ -207,16 +160,13 @@ namespace BackHost.DB_Migration
                     b.Property<short>("Status")
                         .HasColumnType("smallint");
 
-                    b.Property<DateTime?>("TarikhNamayandegi")
+                    b.Property<DateTime>("TarikhNamayandegi")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("TarikhVagozari")
+                    b.Property<DateTime>("TarikhVagozari")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("VaziateForoosh")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VaziateSanad")
+                    b.Property<int>("VahedId")
                         .HasColumnType("int");
 
                     b.Property<int>("VaziateVahed")
@@ -225,10 +175,6 @@ namespace BackHost.DB_Migration
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
-
-                    b.HasIndex("DastgaheMoarrefiKonnande");
-
-                    b.HasIndex("NahveForoosh");
 
                     b.ToTable("Vaheds");
                 });
@@ -381,21 +327,11 @@ namespace BackHost.DB_Migration
                 {
                     b.HasOne("BackHost.DBs.City", "City")
                         .WithMany()
-                        .HasForeignKey("CityId");
-
-                    b.HasOne("BackHost.DBs.Organization", "Organization")
-                        .WithMany()
-                        .HasForeignKey("DastgaheMoarrefiKonnande");
-
-                    b.HasOne("BackHost.DBs.SellMethod", "SellMethod")
-                        .WithMany()
-                        .HasForeignKey("NahveForoosh");
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("City");
-
-                    b.Navigation("Organization");
-
-                    b.Navigation("SellMethod");
                 });
 #pragma warning restore 612, 618
         }

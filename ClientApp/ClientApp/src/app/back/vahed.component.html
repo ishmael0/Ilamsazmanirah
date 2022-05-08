@@ -1,24 +1,271 @@
 
 
 <ng-template #form let-item="item">
-  <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusTitleForm;context:{item:item}"></ng-container>
-  <form nz-form [formGroup]="item">
 
-    <nz-form-item>
-      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="Title">عنوان</nz-form-label>
-       <nz-form-item><nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="عنوان را وارد کنید">
-        <input nz-input formControlName="Title" />
-       </nz-form-control></nz-form-item> 
-    </nz-form-item>
+  <nz-tabset [nzAnimated]="false">
+    <nz-tab nzTitle=" اطلاعات فروشگاه">
+      <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusForm;context:{item:item}"></ng-container>
+      <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
+
+        <div nz-row>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> شماره واحد </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="شماره واحد را وارد نمایید." nz-input formControlName="ShomareVahed" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> وضعیت فروش </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-select nzMode="default"
+                           placeholder="وضعیت فروش را وارد نمایید." formControlName="VaziateForoosh" nzShowSearch nzAllowClear>
+                  <nz-option *ngFor="let i of listCache.VaziateForoosh" [nzValue]="i.Id" [nzLabel]="i.Title">    </nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> شهر </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+
+                <nz-select nzMode="default"
+                           placeholder="شهر را وارد نمایید."
+                           formControlName="CityId" nzShowSearch nzAllowClear>
+                  <nz-option *ngFor="let i of listCache.cities" [nzValue]="i.Id" [nzLabel]="i.Title">    </nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> كد كاداستر پلاك زمين </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="كد كاداستر پلاك زمين را وارد نمایید." nz-input formControlName="Code" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> وضعیت سند </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="وضعیت سند را وارد نمایید." nz-input formControlName="VaziateSanad" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> نام بهره بردار </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-select nzMode="default"
+                           placeholder="نام بهره بردار را وارد نمایید."
+                           formControlName="NameBahreBardar" nzShowSearch nzAllowClear>
+                  <nz-option *ngFor="let i of listCache.VaziateSanad" [nzValue]="i.Id" [nzLabel]="i.Title">    </nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> نام خانوادگی بهره بردار </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="نام خانوادگی بهره بردار را وارد نمایید." nz-input formControlName="FamilyBahreBardar" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> سمت بهره بردار </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="سمت بهره بردار را وارد نمایید." nz-input formControlName="SematBahreBardar" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> دستگاه معرفي كننده </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <nz-select nzMode="default"
+                           placeholder="دستگاه معرفي كننده را وارد نمایید."
+                           formControlName="DastgaheMoarrefiKonnande" nzShowSearch nzAllowClear>
+                  <nz-option *ngFor="let i of listCache.organizations" [nzValue]="i.Id" [nzLabel]="i.Title">    </nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> وضعيت قرارداد-شماره </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="وضعيت قرارداد-شماره را وارد نمایید." nz-input formControlName="GharardadShomare" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> وضعيت قرارداد-تاریخ </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="وضعيت قرارداد-تاریخ را وارد نمایید." nz-input formControlName="GharardadTarikh" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> وضعيت قرارداد-مدت </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="وضعيت قرارداد-مدت را وارد نمایید." nz-input formControlName="GharardadModdat" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> وضعيت قرارداداجاره ماهانه </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="وضعيت قرارداداجاره ماهانه را وارد نمایید." nz-input formControlName="GharardadEjare" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> اجاره پرداختی سال98 </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="number" placeholder="اجاره پرداختی سال98 را وارد نمایید." nz-input formControlName="Ejare98" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> اجاره پرداختی سال99 </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="number" placeholder="اجاره پرداختی سال99 را وارد نمایید." nz-input formControlName="Ejare99" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> مبلغ نمايندگي </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="number" placeholder="مبلغ نمايندگي را وارد نمایید." nz-input formControlName="MablaghNamayandegi" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> ارزش كارشناسي </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="number" placeholder="ارزش كارشناسي را وارد نمایید." nz-input formControlName="ArzesheKarshenasi" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> اعلام نهايي به وزارت يا داريي </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="number" placeholder="اعلام نهايي به وزارت يا داريي را وارد نمایید." nz-input formControlName="ElamBeDarayi" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> نحوه فروش </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+
+                <nz-select nzMode="default"
+                           placeholder="نحوه فروش را وارد نمایید."
+                           formControlName="NahveForoosh" nzShowSearch nzAllowClear>
+                  <nz-option *ngFor="let i of listCache.sellMethods" [nzValue]="i.Id" [nzLabel]="i.Title">    </nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> شماره واگذاري </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="شماره واگذاري را وارد نمایید." nz-input formControlName="ShomareVagozari" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> تاريخ واگذاري </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="تاريخ واگذاري را وارد نمایید." nz-input formControlName="TarikhVagozari" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> شماره نمايندگي </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="شماره نمايندگي را وارد نمایید." nz-input formControlName="ShomareNamayandegi" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> تاريخ نمايندگي </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="تاريخ نمايندگي را وارد نمایید." nz-input formControlName="TarikhNamayandegi" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> وضعيت واحد </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+
+                <nz-select nzMode="default"
+                           placeholder="وضعيت واحد را وارد نمایید."
+                           formControlName="VaziateVahed" nzShowSearch nzAllowClear>
+                  <nz-option *ngFor="let i of listCache.VaziateVahed" [nzValue]="i.Id" [nzLabel]="i.Title">    </nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> آدرس </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="آدرس را وارد نمایید." nz-input formControlName="Address" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <nz-form-label [nzXs]="24" [nzSm]="6" [nzMd]="3"> توضيحات </nz-form-label>
+          <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
+            <nz-form-item>
+              <nz-form-control>
+                <input type="text" placeholder="توضيحات را وارد نمایید." nz-input formControlName="Description" />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
 
 
-  </form>
+
+
+
+
+
+
+
+
+        </div>
+
+      </form>
+    </nz-tab>
+  </nz-tabset>
+
 </ng-template>
 
 <ng-template #viewMessage>
   آیدی: 012331323
 </ng-template>
 <ng-template #search>
+
+
 
 
 

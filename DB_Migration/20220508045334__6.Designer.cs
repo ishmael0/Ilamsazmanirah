@@ -4,6 +4,7 @@ using BackHost.DBs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackHost.DB_Migration
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20220508045334__6")]
+    partial class _6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,7 +116,7 @@ namespace BackHost.DB_Migration
                     b.Property<int>("ArzesheKarshenasi")
                         .HasColumnType("int");
 
-                    b.Property<long?>("CityId")
+                    b.Property<long>("CityId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Code")
@@ -123,7 +125,7 @@ namespace BackHost.DB_Migration
                     b.Property<DateTime?>("Create")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("DastgaheMoarrefiKonnande")
+                    b.Property<long>("DastgaheMoarrefiKonnande")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Description")
@@ -180,7 +182,7 @@ namespace BackHost.DB_Migration
                     b.Property<string>("MadrakGhabli")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("NahveForoosh")
+                    b.Property<long>("NahveForoosh")
                         .HasColumnType("bigint");
 
                     b.Property<string>("NameBahreBardar")
@@ -207,10 +209,10 @@ namespace BackHost.DB_Migration
                     b.Property<short>("Status")
                         .HasColumnType("smallint");
 
-                    b.Property<DateTime?>("TarikhNamayandegi")
+                    b.Property<DateTime>("TarikhNamayandegi")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("TarikhVagozari")
+                    b.Property<DateTime>("TarikhVagozari")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("VaziateForoosh")
@@ -381,15 +383,21 @@ namespace BackHost.DB_Migration
                 {
                     b.HasOne("BackHost.DBs.City", "City")
                         .WithMany()
-                        .HasForeignKey("CityId");
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BackHost.DBs.Organization", "Organization")
                         .WithMany()
-                        .HasForeignKey("DastgaheMoarrefiKonnande");
+                        .HasForeignKey("DastgaheMoarrefiKonnande")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BackHost.DBs.SellMethod", "SellMethod")
                         .WithMany()
-                        .HasForeignKey("NahveForoosh");
+                        .HasForeignKey("NahveForoosh")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("City");
 

@@ -2,12 +2,35 @@ import { Component, OnInit, ChangeDetectionStrategy, Injector } from '@angular/c
 import { BaseComponent } from '../../../../../../Santel/ClientApp/src/app/template/base/base.component';
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { getNameOf, HTTPTypes, numberToText, RequestPlus } from '../../../../../../Santel/ClientApp/src/app/services/utils';
-import { City, Vahed} from './back.module';
+import { getNameOf, HTTPTypes, numberToText, RequestPlus, ValueTitle } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+import { City, Organization, SellMethod, Vahed } from './back.module';
 
 
 
 
+
+
+
+@Component({
+  selector: 'app-organization',
+  templateUrl: './organization.component.html',
+  styles: [
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class OrganizationComponent extends BaseComponent<Organization> {
+}
+
+
+@Component({
+  selector: 'app-sell-method',
+  templateUrl: './sell-method.component.html',
+  styles: [
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class SellMethodComponent extends BaseComponent<SellMethod> {
+}
 
 
 
@@ -21,7 +44,6 @@ import { City, Vahed} from './back.module';
 export class CityComponent extends BaseComponent<City> {
 }
 
-
 @Component({
   selector: 'app-vahed',
   templateUrl: './vahed.component.html',
@@ -30,5 +52,13 @@ export class CityComponent extends BaseComponent<City> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VahedComponent extends BaseComponent<Vahed> {
+  override async fill() {
+    this.listCache.cities = this.dataManager.getLoadedData(City);
+    this.listCache.sellMethods = this.dataManager.getLoadedData(SellMethod);
+    this.listCache.organizations = this.dataManager.getLoadedData(Organization);
+    this.listCache.VaziateVahed = [new ValueTitle<number>(1, 'آپارتمانی'), new ValueTitle<number>(2, 'ویلایی')];
+    this.listCache.VaziateSanad = [new ValueTitle<number>(0, 'فاقد سند'), new ValueTitle<number>(1, 'دارای سند')]
+    this.listCache.VaziateForoosh = [new ValueTitle<number>(1, 'فروش رفته'), new ValueTitle<number>(0, 'فروش نرفته')]
+  }
 }
 
