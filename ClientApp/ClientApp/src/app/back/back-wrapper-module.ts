@@ -3,7 +3,7 @@ import { RouterModule, Routes, Router } from '@angular/router';
 import { LoginComponent } from "../../../../../../Santel/ClientApp/src/app/back-wrapper/components/login/login.component";
 import { WebSelectorComponent } from "../../../../../../Santel/ClientApp/src/app/back-wrapper/components/web-selector/web-selector.component";
 //import { SharedModule } from "../../../../../../Santel/ClientApp/src/app/shared/shared.module";
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer , Title} from '@angular/platform-browser';
 import { TemplateModule } from "../../../../../../Santel/ClientApp/src/app/template/template.module";
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { AntDesignSharedModulesModule } from "../../../../../../Santel/ClientApp/src/app/ant-design-shared-modules/ant-design-shared-modules.module";
@@ -52,7 +52,7 @@ const routes: Routes = [
   ]
 })
 export class BackWrapperModule {
-  constructor(wss: WebSiteService, themeService: ThemeService, domSanitizer: DomSanitizer, auth: AuthService, router: Router) {
+  constructor(wss: WebSiteService, themeService: ThemeService, domSanitizer: DomSanitizer, auth: AuthService, router: Router, titleService:Title) {
     AppInitializerProvider2(themeService, domSanitizer, auth);
     wss.appConfig = {
       routes: routes,
@@ -61,6 +61,7 @@ export class BackWrapperModule {
       logInDesc: 'ilamsazmanirah',
       urlPrefix: '/management/',
     }
+    titleService.setTitle("مدیریت - " + 'ilamsazmanirah');
   }
 
 }
