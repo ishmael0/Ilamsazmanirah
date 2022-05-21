@@ -256,8 +256,39 @@
 
       </form>
     </nz-tab>
-  </nz-tabset>
+    <nz-tab nzTitle="مستندات">
+      <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
 
+
+
+
+        <button nz-button (click)="docId = item.controls['Id'].value; docU = 'Gharardad';imageModal = true;">
+          <i nz-icon
+             [innerHtml]="icons['plus-thick']"></i>
+        </button>
+        <app-drag-and-drop-list formControlName="Gharardad"
+                                [header]="header"
+                                [addEnabled]="false"
+                                [body]="body">
+          <ng-template #header>
+            <th>ردیف</th>
+            <th> نام </th>
+            <th>فایل</th>
+          </ng-template>
+          <ng-template #body let-subitem="item" let-index="index">
+            <td>{{index + 1}}</td>
+            <td style="font-weight:bold">
+              <input type="text"   nz-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="subitem.Title" />
+
+            </td>
+            <td style="font-weight:bold">
+              {{subitem.Url}}
+            </td>
+          </ng-template>
+        </app-drag-and-drop-list>
+      </form>
+    </nz-tab>
+  </nz-tabset>
 </ng-template>
 
 <ng-template #viewMessage>
@@ -286,3 +317,11 @@
 
 <app-template #mainTemplate *ngIf="ok" [com]="this"></app-template>
 
+<ng-container *ngIf="mainTemplate">
+
+  <nz-modal [(nzVisible)]="imageModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="افزودن تصویر" (nzOnCancel)="imageModal = false">
+    <ng-container *nzModalContent>
+      <app-file-uploader-card [key]="dataManager.key" [Id]="1" (onOk)="addDoc($event)"></app-file-uploader-card>
+    </ng-container>
+  </nz-modal>
+</ng-container>

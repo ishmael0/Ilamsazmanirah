@@ -60,5 +60,18 @@ export class VahedComponent extends BaseComponent<Vahed> {
     this.listCache.VaziateSanad = [new ValueTitle<number>(0, 'فاقد سند'), new ValueTitle<number>(1, 'دارای سند')]
     this.listCache.VaziateForoosh = [new ValueTitle<number>(1, 'فروش رفته'), new ValueTitle<number>(0, 'فروش نرفته')]
   }
+
+  docU = '';
+  docId = 0;
+  imageModal = false;
+  addDoc(e: string[]) {
+    this.imageModal = false;
+    let x: any[] = this.selectedForm().form.controls[this.docU].value;
+    for (var i = 0; i < e.length; i++) {
+      x.push({ Url: e[i], Title: '' });
+    }
+    this.selectedForm().form.controls[this.docU].setValue(x);
+    this.makeItDirty(this.selectedForm().form);
+  }
 }
 
