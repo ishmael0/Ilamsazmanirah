@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BaseModel, BaseModelWithTitle, ComponentTypes, EntityConfiguration, getNameOf, isUndefinedOrWhiteSpaces, PropertyConfiguration, Status, ValueTitle, WebSiteConfiguration } from '../../../../../../Santel/ClientApp/src/app/services/utils';
 import { WebSiteService } from '../../../../../../Santel/ClientApp/src/app/services/website.service';
 import { Validators, FormGroup } from '@angular/forms';
-import { ActiveStatus, defaultPropertyConfiguration, defaultPropertyWithTitleConfiguration, defaultStatuses, DeletedStatus, FullStatuses, PublishedStatus } from '../../../../../../Santel/ClientApp/src/app/services/properties';
+import { ActiveStatus, CreateProperty, defaultPropertyConfiguration, defaultPropertyWithTitleConfiguration, defaultStatuses, DeletedStatus, FullStatuses, IdProperty, PublishedStatus } from '../../../../../../Santel/ClientApp/src/app/services/properties';
 
 import "reflect-metadata";
 import { CityComponent, OrganizationComponent, SellMethodComponent, VahedComponent } from './components';
@@ -81,14 +81,14 @@ export const config: WebSiteConfiguration = new WebSiteConfiguration('DB', 'مد
     ...defaultPropertyWithTitleConfiguration,
   ], { componentType: ComponentTypes.table, icon: 'city-variant-outline' }),
   new EntityConfiguration<Vahed>("Vahed", Vahed, VahedComponent, 'واحد', defaultStatuses, [
-    ...defaultPropertyConfiguration,
-
+    IdProperty, CreateProperty,
+    new PropertyConfiguration<BaseModel>(c => c.Status, ' وضعیت ', { InPicker: false, InTable: false, InSearch: false, Type: 'enum', value: 'Active' }),
     new PropertyConfiguration<Vahed>(c => c.ShomareVahed, 'شماره واحد', { Type: 'string', InPicker: true, Validators: [] }),
     new PropertyConfiguration<Vahed>(c => c.VaziateForoosh, 'وضعیت فروش', { TypeHelper: 'VaziateForoosh', Type: 'list', InPicker: true, Validators: [], }),
     new PropertyConfiguration<Vahed>(c => c.CityId, 'شهر', { TypeHelper: 'cities', InTable: true, Type: 'list', InPicker: true, Validators: [] }),
     new PropertyConfiguration<Vahed>(c => c.Code, 'كد كاداستر پلاك زمين', { InTable: true, Type: 'string', InPicker: true, Validators: [] }),
     new PropertyConfiguration<Vahed>(c => c.VaziateSanad, 'وضعیت سند', { InTable: false, Type: 'list', TypeHelper: 'VaziateSanad', InPicker: true, Validators: [] }),
-    new PropertyConfiguration<Vahed>(c => c.NameBahreBardar, 'نام بهره بردار', { InTable: true, Type: 'string', InPicker: true, Validators: [] }),
+    new PropertyConfiguration<Vahed>(c => c.NameBahreBardar, 'نام بهره بردار', { InTable: false, Type: 'string', InPicker: true, Validators: [] }),
     new PropertyConfiguration<Vahed>(c => c.FamilyBahreBardar, 'نام خانوادگی بهره بردار', { InTable: true, Type: 'string', InPicker: true, Validators: [] }),
     new PropertyConfiguration<Vahed>(c => c.SematBahreBardar, 'سمت بهرهبردار', { InTable: false, Type: 'string', InPicker: true, Validators: [] }),
     new PropertyConfiguration<Vahed>(c => c.DastgaheMoarrefiKonnande, 'دستگاه معرفي كننده', { InTable: true, TypeHelper: 'organizations', Type: 'list', InPicker: true, Validators: [] }),

@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Injector } from '@angular/c
 import { BaseComponent } from '../../../../../../Santel/ClientApp/src/app/template/base/base.component';
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { getNameOf, HTTPTypes, numberToText, RequestPlus, ValueTitle } from '../../../../../../Santel/ClientApp/src/app/services/utils';
+import { getNameOf, HTTPTypes, JM, numberToText, RequestPlus, ValueTitle } from '../../../../../../Santel/ClientApp/src/app/services/utils';
 import { City, Organization, SellMethod, Vahed } from './back.module';
 
 
@@ -64,6 +64,17 @@ export class VahedComponent extends BaseComponent<Vahed> {
   docU = '';
   docId = 0;
   imageModal = false;
+  override async onGet(m: string[], d: JM<Vahed>) {
+    super.onGet(m, d)
+    this.dataManager.ViewRecords.forEach(c => {
+      c.CityTitle = this.listCache.cities.find((d:any) => d.Id == c.CityId)?.Title;
+      c.VaziateForoosh_ = this.listCache.VaziateForoosh.find((d: any) => d.Value == c.VaziateForoosh)?.Title;
+      c.VaziateSanad_ = this.listCache.VaziateSanad.find((d: any) => d.Value == c.VaziateSanad)?.Title;
+      c.VaziateVahed_ = this.listCache.VaziateVahed.find((d: any) => d.Value == c.VaziateVahed)?.Title;
+      c.DastgaheMoarrefiKonnandeTitle = this.listCache.organizations.find((d: any) => d.Id == c.DastgaheMoarrefiKonnande)?.Title;
+    })
+
+  }
   addDoc(e: string[]) {
     this.imageModal = false;
     let x: any[] = this.selectedForm().form.controls[this.docU].value;
@@ -72,6 +83,9 @@ export class VahedComponent extends BaseComponent<Vahed> {
     }
     this.selectedForm().form.controls[this.docU].setValue(x);
     this.makeItDirty(this.selectedForm().form);
+  }
+  openLink(url:string) {
+    window.open(url, '_blank');
   }
 }
 

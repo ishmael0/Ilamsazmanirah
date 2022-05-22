@@ -3,7 +3,7 @@
 <ng-template #form let-item="item">
 
   <nz-tabset [nzAnimated]="false">
-    <nz-tab nzTitle=" اطلاعات فروشگاه">
+    <nz-tab nzTitle=" اطلاعات واحد">
       <ng-container *ngTemplateOutlet="mainTemplate?.defaultIdStatusForm;context:{item:item}"></ng-container>
       <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
 
@@ -22,7 +22,7 @@
               <nz-form-control>
                 <nz-select nzMode="default"
                            placeholder="وضعیت فروش را وارد نمایید." formControlName="VaziateForoosh" nzShowSearch nzAllowClear>
-                  <nz-option *ngFor="let i of listCache.VaziateForoosh" [nzValue]="i.Id" [nzLabel]="i.Title">    </nz-option>
+                  <nz-option *ngFor="let i of listCache.VaziateForoosh" [nzValue]="i.Value" [nzLabel]="i.Title">    </nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>
@@ -35,7 +35,7 @@
                 <nz-select nzMode="default"
                            placeholder="شهر را وارد نمایید."
                            formControlName="CityId" nzShowSearch nzAllowClear>
-                  <nz-option *ngFor="let i of listCache.cities" [nzValue]="i.Id" [nzLabel]="i.Title">    </nz-option>
+                  <nz-option *ngFor="let i of listCache.cities" [nzValue]="i.Value" [nzLabel]="i.Title">    </nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>
@@ -52,7 +52,11 @@
           <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
             <nz-form-item>
               <nz-form-control>
-                <input type="text" placeholder="وضعیت سند را وارد نمایید." nz-input formControlName="VaziateSanad" />
+                <nz-select nzMode="default"
+                           placeholder="وضعیت سند را وارد نمایید."
+                           formControlName="VaziateSanad" nzShowSearch nzAllowClear>
+                  <nz-option *ngFor="let i of listCache.VaziateSanad" [nzValue]="i.Value" [nzLabel]="i.Title">    </nz-option>
+                </nz-select>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -60,11 +64,9 @@
           <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
             <nz-form-item>
               <nz-form-control>
-                <nz-select nzMode="default"
-                           placeholder="نام بهره بردار را وارد نمایید."
-                           formControlName="NameBahreBardar" nzShowSearch nzAllowClear>
-                  <nz-option *ngFor="let i of listCache.VaziateSanad" [nzValue]="i.Id" [nzLabel]="i.Title">    </nz-option>
-                </nz-select>
+                <input type="text" placeholder="نام بهره بردار را وارد نمایید." nz-input formControlName="NameBahreBardar" />
+
+
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -108,7 +110,7 @@
           <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
             <nz-form-item>
               <nz-form-control>
-                <input type="text" placeholder="وضعيت قرارداد-تاریخ را وارد نمایید." nz-input formControlName="GharardadTarikh" />
+                <persian-date-time-picker formControlName="GharardadTarikh" placeholder="وضعيت قرارداد-تاریخ را وارد نمایید."></persian-date-time-picker>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -193,7 +195,7 @@
           <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
             <nz-form-item>
               <nz-form-control>
-                <input type="text" placeholder="تاريخ واگذاري را وارد نمایید." nz-input formControlName="TarikhVagozari" />
+                <persian-date-time-picker formControlName="TarikhVagozari" placeholder="تاريخ واگذاري را وارد نمایید." ></persian-date-time-picker>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -209,7 +211,7 @@
           <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
             <nz-form-item>
               <nz-form-control>
-                <input type="text" placeholder="تاريخ نمايندگي را وارد نمایید." nz-input formControlName="TarikhNamayandegi" />
+                <persian-date-time-picker formControlName="TarikhNamayandegi"  placeholder="تاريخ نمايندگي را وارد نمایید."></persian-date-time-picker>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -221,7 +223,7 @@
                 <nz-select nzMode="default"
                            placeholder="وضعيت واحد را وارد نمایید."
                            formControlName="VaziateVahed" nzShowSearch nzAllowClear>
-                  <nz-option *ngFor="let i of listCache.VaziateVahed" [nzValue]="i.Id" [nzLabel]="i.Title">    </nz-option>
+                  <nz-option *ngFor="let i of listCache.VaziateVahed" [nzValue]="i.Value" [nzLabel]="i.Title">    </nz-option>
                 </nz-select>
               </nz-form-control>
             </nz-form-item>
@@ -230,7 +232,7 @@
           <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
             <nz-form-item>
               <nz-form-control>
-                <input type="text" placeholder="آدرس را وارد نمایید." nz-input formControlName="Address" />
+                <textarea nz-input formControlName="Address" placeholder="آدرس را وارد نمایید." [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -238,7 +240,7 @@
           <div nz-col [nzXs]="24" [nzSm]="18" [nzMd]="9">
             <nz-form-item>
               <nz-form-control>
-                <input type="text" placeholder="توضيحات را وارد نمایید." nz-input formControlName="Description" />
+                <textarea nz-input formControlName="Description" placeholder="توضيحات را وارد نمایید." [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -256,36 +258,338 @@
 
       </form>
     </nz-tab>
-    <nz-tab nzTitle="مستندات">
+    <nz-tab nzTitle="مستندات" *ngIf="item.controls['Id'].value>0">
       <form [nzLayout]="'horizontal'" nz-form [formGroup]="item">
+        <div nz-row>
+          <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12">
+            <div class="glass">
+              <button nz-button (click)="docId = item.controls['Id'].value; docU = 'Gharardad';imageModal = true;">
+                <i nz-icon
+                   [innerHtml]="icons['plus-thick']"></i>
+                اضافه کردن مستندات قراردادها
+              </button>
 
+              <app-drag-and-drop-list formControlName="Gharardad"
+                                      [header]="header"
+                                      [addEnabled]="false"
+                                      [body]="body">
+                <ng-template #header>
+                  <th>ردیف</th>
+                  <th> نام </th>
+                  <th>فایل</th>
+                </ng-template>
+                <ng-template #body let-subitem="item" let-index="index">
+                  <td>{{index + 1}}</td>
+                  <td style="font-weight:bold">
+                    <input type="text" nz-input [ngModelOptions]="{standalone: true}" [(ngModel)]="subitem.Title" />
+                  </td>
+                  <td>
+                    <button nz-button (click)="openLink(subitem.Url)">
+                      <i nz-icon
+                         [innerHtml]="icons['download']"></i>
+                    </button>
+                  </td>
+                </ng-template>
+              </app-drag-and-drop-list>
+            </div>
+          </div>
+          <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12">
+            <div class="glass">
+              <button nz-button (click)="docId = item.controls['Id'].value; docU = 'HeyatNamayandegi';imageModal = true;">
+                <i nz-icon
+                   [innerHtml]="icons['plus-thick']"></i>
+                اضافه کردن مستندات هیت نمایندگی
+              </button>
 
+              <app-drag-and-drop-list formControlName="HeyatNamayandegi"
+                                      [header]="header"
+                                      [addEnabled]="false"
+                                      [body]="body">
+                <ng-template #header>
+                  <th>ردیف</th>
+                  <th> نام </th>
+                  <th>فایل</th>
+                </ng-template>
+                <ng-template #body let-subitem="item" let-index="index">
+                  <td>{{index + 1}}</td>
+                  <td style="font-weight:bold">
+                    <input type="text" nz-input [ngModelOptions]="{standalone: true}" [(ngModel)]="subitem.Title" />
+                  </td>
+                  <td>
+                    <button nz-button (click)="openLink(subitem.Url)">
+                      <i nz-icon
+                         [innerHtml]="icons['download']"></i>
+                    </button>
+                  </td>
+                </ng-template>
+              </app-drag-and-drop-list>
+            </div>
+          </div>
+          <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12">
+            <div class="glass">
+              <button nz-button (click)="docId = item.controls['Id'].value; docU = 'Estelam';imageModal = true;">
+                <i nz-icon
+                   [innerHtml]="icons['plus-thick']"></i>
+                اضافه کردن مستندات استعلام
+              </button>
 
+              <app-drag-and-drop-list formControlName="Estelam"
+                                      [header]="header"
+                                      [addEnabled]="false"
+                                      [body]="body">
+                <ng-template #header>
+                  <th>ردیف</th>
+                  <th> نام </th>
+                  <th>فایل</th>
+                </ng-template>
+                <ng-template #body let-subitem="item" let-index="index">
+                  <td>{{index + 1}}</td>
+                  <td style="font-weight:bold">
+                    <input type="text" nz-input [ngModelOptions]="{standalone: true}" [(ngModel)]="subitem.Title" />
+                  </td>
+                  <td>
+                    <button nz-button (click)="openLink(subitem.Url)">
+                      <i nz-icon
+                         [innerHtml]="icons['download']"></i>
+                    </button>
+                  </td>
+                </ng-template>
+              </app-drag-and-drop-list>
+            </div>
+          </div>
+          <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12">
 
-        <button nz-button (click)="docId = item.controls['Id'].value; docU = 'Gharardad';imageModal = true;">
-          <i nz-icon
-             [innerHtml]="icons['plus-thick']"></i>
-        </button>
-        <app-drag-and-drop-list formControlName="Gharardad"
-                                [header]="header"
-                                [addEnabled]="false"
-                                [body]="body">
-          <ng-template #header>
-            <th>ردیف</th>
-            <th> نام </th>
-            <th>فایل</th>
-          </ng-template>
-          <ng-template #body let-subitem="item" let-index="index">
-            <td>{{index + 1}}</td>
-            <td style="font-weight:bold">
-              <input type="text"   nz-input [ngModelOptions]="{standalone: true}"  [(ngModel)]="subitem.Title" />
+            <div class="glass">
+              <button nz-button (click)="docId = item.controls['Id'].value; docU = 'Karshenasi';imageModal = true;">
+                <i nz-icon
+                   [innerHtml]="icons['plus-thick']"></i>
+                اضافه کردن مستندات کارشناسی
+              </button>
 
-            </td>
-            <td style="font-weight:bold">
-              {{subitem.Url}}
-            </td>
-          </ng-template>
-        </app-drag-and-drop-list>
+              <app-drag-and-drop-list formControlName="Karshenasi"
+                                      [header]="header"
+                                      [addEnabled]="false"
+                                      [body]="body">
+                <ng-template #header>
+                  <th>ردیف</th>
+                  <th> نام </th>
+                  <th>فایل</th>
+                </ng-template>
+                <ng-template #body let-subitem="item" let-index="index">
+                  <td>{{index + 1}}</td>
+                  <td style="font-weight:bold">
+                    <input type="text" nz-input [ngModelOptions]="{standalone: true}" [(ngModel)]="subitem.Title" />
+                  </td>
+                  <td>
+                    <button nz-button (click)="openLink(subitem.Url)">
+                      <i nz-icon
+                         [innerHtml]="icons['download']"></i>
+                    </button>
+                  </td>
+                </ng-template>
+              </app-drag-and-drop-list>
+            </div>
+          </div>
+          <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12">
+
+            <div class="glass">
+              <button nz-button (click)="docId = item.controls['Id'].value; docU = 'EjareName';imageModal = true;">
+                <i nz-icon
+                   [innerHtml]="icons['plus-thick']"></i>
+                اضافه کردن مستندات اجاره نامه
+              </button>
+
+              <app-drag-and-drop-list formControlName="EjareName"
+                                      [header]="header"
+                                      [addEnabled]="false"
+                                      [body]="body">
+                <ng-template #header>
+                  <th>ردیف</th>
+                  <th> نام </th>
+                  <th>فایل</th>
+                </ng-template>
+                <ng-template #body let-subitem="item" let-index="index">
+                  <td>{{index + 1}}</td>
+                  <td style="font-weight:bold">
+                    <input type="text" nz-input [ngModelOptions]="{standalone: true}" [(ngModel)]="subitem.Title" />
+                  </td>
+                  <td>
+                    <button nz-button (click)="openLink(subitem.Url)">
+                      <i nz-icon
+                         [innerHtml]="icons['download']"></i>
+                    </button>
+                  </td>
+                </ng-template>
+              </app-drag-and-drop-list>
+            </div>
+          </div>
+          <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12">
+
+            <div class="glass">
+              <button nz-button (click)="docId = item.controls['Id'].value; docU = 'MadrakGhabli';imageModal = true;">
+                <i nz-icon
+                   [innerHtml]="icons['plus-thick']"></i>
+                اضافه کردن مستندات مدارک متقاضی قبلی
+              </button>
+
+              <app-drag-and-drop-list formControlName="MadrakGhabli"
+                                      [header]="header"
+                                      [addEnabled]="false"
+                                      [body]="body">
+                <ng-template #header>
+                  <th>ردیف</th>
+                  <th> نام </th>
+                  <th>فایل</th>
+                </ng-template>
+                <ng-template #body let-subitem="item" let-index="index">
+                  <td>{{index + 1}}</td>
+                  <td style="font-weight:bold">
+                    <input type="text" nz-input [ngModelOptions]="{standalone: true}" [(ngModel)]="subitem.Title" />
+                  </td>
+                  <td>
+                    <button nz-button (click)="openLink(subitem.Url)">
+                      <i nz-icon
+                         [innerHtml]="icons['download']"></i>
+                    </button>
+                  </td>
+                </ng-template>
+              </app-drag-and-drop-list>
+            </div>
+          </div>
+          <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12">
+
+            <div class="glass">
+              <button nz-button (click)="docId = item.controls['Id'].value; docU = 'MadrakFeli';imageModal = true;">
+                <i nz-icon
+                   [innerHtml]="icons['plus-thick']"></i>
+                اضافه کردن مستندات مدارک متقاضی فعلی
+              </button>
+
+              <app-drag-and-drop-list formControlName="MadrakFeli"
+                                      [header]="header"
+                                      [addEnabled]="false"
+                                      [body]="body">
+                <ng-template #header>
+                  <th>ردیف</th>
+                  <th> نام </th>
+                  <th>فایل</th>
+                </ng-template>
+                <ng-template #body let-subitem="item" let-index="index">
+                  <td>{{index + 1}}</td>
+                  <td style="font-weight:bold">
+                    <input type="text" nz-input [ngModelOptions]="{standalone: true}" [(ngModel)]="subitem.Title" />
+                  </td>
+                  <td>
+                    <button nz-button (click)="openLink(subitem.Url)">
+                      <i nz-icon
+                         [innerHtml]="icons['download']"></i>
+                    </button>
+                  </td>
+                </ng-template>
+              </app-drag-and-drop-list>
+            </div>
+          </div>
+          <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12">
+
+            <div class="glass">
+              <button nz-button (click)="docId = item.controls['Id'].value; docU = 'Korooki';imageModal = true;">
+                <i nz-icon
+                   [innerHtml]="icons['plus-thick']"></i>
+                اضافه کردن مستندات کروکی
+              </button>
+
+              <app-drag-and-drop-list formControlName="Korooki"
+                                      [header]="header"
+                                      [addEnabled]="false"
+                                      [body]="body">
+                <ng-template #header>
+                  <th>ردیف</th>
+                  <th> نام </th>
+                  <th>فایل</th>
+                </ng-template>
+                <ng-template #body let-subitem="item" let-index="index">
+                  <td>{{index + 1}}</td>
+                  <td style="font-weight:bold">
+                    <input type="text" nz-input [ngModelOptions]="{standalone: true}" [(ngModel)]="subitem.Title" />
+                  </td>
+                  <td>
+                    <button nz-button (click)="openLink(subitem.Url)">
+                      <i nz-icon
+                         [innerHtml]="icons['download']"></i>
+                    </button>
+                  </td>
+                </ng-template>
+              </app-drag-and-drop-list>
+            </div>
+          </div>
+          <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12">
+
+            <div class="glass">
+              <button nz-button (click)="docId = item.controls['Id'].value; docU = 'Sanad';imageModal = true;">
+                <i nz-icon
+                   [innerHtml]="icons['plus-thick']"></i>
+                اضافه کردن مستندات سند
+              </button>
+
+              <app-drag-and-drop-list formControlName="Sanad"
+                                      [header]="header"
+                                      [addEnabled]="false"
+                                      [body]="body">
+                <ng-template #header>
+                  <th>ردیف</th>
+                  <th> نام </th>
+                  <th>فایل</th>
+                </ng-template>
+                <ng-template #body let-subitem="item" let-index="index">
+                  <td>{{index + 1}}</td>
+                  <td style="font-weight:bold">
+                    <input type="text" nz-input [ngModelOptions]="{standalone: true}" [(ngModel)]="subitem.Title" />
+                  </td>
+                  <td>
+                    <button nz-button (click)="openLink(subitem.Url)">
+                      <i nz-icon
+                         [innerHtml]="icons['download']"></i>
+                    </button>
+                  </td>
+                </ng-template>
+              </app-drag-and-drop-list>
+            </div>
+          </div>
+          <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="12">
+
+            <div class="glass">
+              <button nz-button (click)="docId = item.controls['Id'].value; docU = 'SayerMostanadat';imageModal = true;">
+                <i nz-icon
+                   [innerHtml]="icons['plus-thick']"></i>
+                اضافه کردن سایر مستندات
+              </button>
+
+              <app-drag-and-drop-list formControlName="SayerMostanadat"
+                                      [header]="header"
+                                      [addEnabled]="false"
+                                      [body]="body">
+                <ng-template #header>
+                  <th>ردیف</th>
+                  <th> نام </th>
+                  <th>فایل</th>
+                </ng-template>
+                <ng-template #body let-subitem="item" let-index="index">
+                  <td>{{index + 1}}</td>
+                  <td style="font-weight:bold">
+                    <input type="text" nz-input [ngModelOptions]="{standalone: true}" [(ngModel)]="subitem.Title" />
+                  </td>
+                  <td>
+                    <button nz-button (click)="openLink(subitem.Url)">
+                      <i nz-icon
+                         [innerHtml]="icons['download']"></i>
+                    </button>
+                  </td>
+                </ng-template>
+              </app-drag-and-drop-list>
+            </div>
+          </div>
+        </div>
+
       </form>
     </nz-tab>
   </nz-tabset>
@@ -307,9 +611,17 @@
 
 <ng-template #tableBody let-item="item">
   <td>{{ item.Id }}</td>
-  <td>{{ item.Title }}</td>
   <td>{{ item.Create_}}</td>
-  <ng-container *ngTemplateOutlet="mainTemplate?.statusView;context:{value:statusView(item.Status)}"></ng-container>
+  <td>{{item.ShomareVahed}}</td>
+  <td>{{item.VaziateForoosh_}}</td>
+  <td>{{item.CityTitle}}</td>
+  <td>{{item.Code}}</td>
+  <td>
+    {{item.NameBahreBardar}}{{item.FamilyBahreBardar}}
+  </td>
+  <td>{{item.DastgaheMoarrefiKonnandeTitle}}</td>
+  <td>{{item.VaziateVahed_}}</td>
+  <td>{{item.Address}}</td>
 </ng-template>
 
 
@@ -321,7 +633,7 @@
 
   <nz-modal [(nzVisible)]="imageModal" [nzFooter]="mainTemplate.modalEmptyFooter" nzTitle="افزودن تصویر" (nzOnCancel)="imageModal = false">
     <ng-container *nzModalContent>
-      <app-file-uploader-card [key]="dataManager.key" [Id]="1" (onOk)="addDoc($event)"></app-file-uploader-card>
+      <app-file-uploader-card [key]="dataManager.key" [Id]="docId" (onOk)="addDoc($event)"></app-file-uploader-card>
     </ng-container>
   </nz-modal>
 </ng-container>
