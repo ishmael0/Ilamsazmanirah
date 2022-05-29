@@ -56,9 +56,10 @@ export class BackWrapperModule {
     AppInitializerProvider2(themeService, domSanitizer, auth);
     wss.appConfig = {
       routes: routes,
+      showWaterMark:false,
       description: '',
       fullName: '',
-      logInDesc: 'ilamsazmanirah',
+      logInDesc: 'وب سايت خانه هاي سازماني اداره كل راه و شهرسازي استان ایلام',
       urlPrefix: '/management/',
     }
     titleService.setTitle("مدیریت - " + 'ilamsazmanirah');

@@ -85,7 +85,7 @@ export class VahedComponent extends BaseComponent<Vahed> {
     this.makeItDirty(this.selectedForm().form);
   }
   openLink(url:string) {
-    window.open(url, '_blank');
+    window.open("front/" + url, '_blank');
   }
 }
 
