@@ -14,7 +14,9 @@ namespace BackHost
             var roleManager = x.GetRequiredService<RoleManager<BaseApplicationRole>>();
             var userManager = x.GetRequiredService<UserManager<BaseApplicationUser>>();
             //var test =await _context.Products.Where(c => c.Labels.Any(d => d == 1)).ToListAsync();
-            var permission = await AccDB.Permissions.FirstOrDefaultAsync(c => c.Title == "DB/City");
+            var permissiondb = await AccDB.Permissions.FirstOrDefaultAsync(c => c.Title == "DB");
+            var permissionCity = await AccDB.Permissions.FirstOrDefaultAsync(c => c.Title == "DB/City");
+            var permissionVahed = await AccDB.Permissions.FirstOrDefaultAsync(c => c.Title == "DB/Vahed");
             var e = await _context.Cities.AnyAsync(c => c.Id > 0);
             if (e) return false;
             foreach (var item in new string[] {
@@ -53,12 +55,30 @@ namespace BackHost
                 var p = new RolePermission()
                 {
                     EntityIds = new List<long> { city.Id },
-                    PermissionId = permission.Id,
+                    PermissionId = permissionCity.Id,
                     RoleId = role.Id,
-                    Title = permission.Title,
-                    Access=new List<string> { "Export", "Delete", "Set", "Get", "UploadAsync", "GetSingle", "View"}
+                    Title = permissionCity.Title,
+                    Access=new List<string> { "Get"}
                 };
                 AccDB.RolePermissions.Add(p);
+                var p2 = new RolePermission()
+                {
+                    EntityIds = new List<long> { },
+                    PermissionId = permissiondb.Id,
+                    RoleId = role.Id,
+                    Title = permissiondb.Title,
+                    Access = new List<string> { "View", "Get" }
+                };
+                AccDB.RolePermissions.Add(p2);
+                var p3 = new RolePermission()
+                {
+                    EntityIds = new List<long> { },
+                    PermissionId = permissionVahed.Id,
+                    RoleId = role.Id,
+                    Title = permissionVahed.Title,
+                    Access = new List<string> { "Export", "Delete", "Set", "Get", "UploadAsync", "GetSingle", "View" }
+                };
+                AccDB.RolePermissions.Add(p3);
                 await _context.SaveChangesAsync();
                 await AccDB.SaveChangesAsync();
             }
