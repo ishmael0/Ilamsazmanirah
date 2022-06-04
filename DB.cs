@@ -1,11 +1,39 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BackHost.DBs
 {
-    public class Vahed:BaseModel
+    public class VahedController : BaseController<DB, Vahed>
+    {
+        public VahedController(DB dbContext, UserPermissionManager upm, IOptions<AppSettingPrivates> options) : base(dbContext, upm, options)
+        {
+        }
+        //public override IQueryable<Vahed> BeforeGet(IQueryable<Vahed> q)
+        //{
+        //    var acc = AccessIdsList(upm, $"{nameof(DB)}/{nameof(City)}");
+        //    if (acc.Count > 0)
+        //        return base.BeforeGet(q);
+        //    return base.BeforeGet(q).Where(c => c.CityId != null && acc.Contains(c.CityId.Value));
+        //}
+        [NonAction]
+        public override IQueryable<Vahed> BuildRequest(IDictionary<string, string> param)
+        {
+            var acc = AccessIdsList(upm, $"{nameof(DB)}/{nameof(City)}");
+            if (acc.Count > 0)
+                return base.BuildRequest(param).Where(c => acc.Contains(c.CityId.Value));
+            return base.BuildRequest(param);
+        }
+    }
+}
+namespace BackHost.DBs
+{
+
+    public class Vahed : BaseModel
     {
         public string? ShomareVahed { get; set; }
         public int VaziateForoosh { get; set; }
@@ -13,7 +41,7 @@ namespace BackHost.DBs
         [ForeignKey("CityId")]
         public City City { get; set; }
         public string? Code { get; set; }
-        public int VaziateSanad{ get; set; }
+        public int VaziateSanad { get; set; }
         public string? NameBahreBardar { get; set; }
         public string? FamilyBahreBardar { get; set; }
         public string? SematBahreBardar { get; set; }
@@ -54,12 +82,12 @@ namespace BackHost.DBs
     }
     public class Document
     {
-        public string Title{ get; set; }
-        public string Url{ get; set; }
+        public string Title { get; set; }
+        public string Url { get; set; }
     }
     [SafeToGetAll]
     [Index(nameof(Title), IsUnique = true)]
-    public class City: BaseModelWithTitle
+    public class City : BaseModelWithTitle
     {
 
     }
@@ -68,7 +96,7 @@ namespace BackHost.DBs
     public class Organization : BaseModelWithTitle
     {
 
-    } 
+    }
     [SafeToGetAll]
     [Index(nameof(Title), IsUnique = true)]
     public class SellMethod : BaseModelWithTitle

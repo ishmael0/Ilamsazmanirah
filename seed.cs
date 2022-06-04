@@ -29,9 +29,9 @@ namespace BackHost
 "ملکشاهی" +"_"+"malekshahi" ,
 "سیروان"  +"_"+"sirvan" ,
 "چرداول"  +"_"+"chardavol" ,
-"هلیلان"   +"_"+"halilan" ,
+"هلیلان"   +"_"+"holilan" ,
 "چوار"    +"_"+"chavar" ,
-"بدره"    +"_"+"bazre"
+"بدره"    +"_"+"badre"
 })
             {
                 var city = new City { Title = item };
