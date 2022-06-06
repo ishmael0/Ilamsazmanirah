@@ -82,6 +82,11 @@ namespace BackHost
                 await _context.SaveChangesAsync();
                 await AccDB.SaveChangesAsync();
             }
+            var cc = await _context.Cities.FirstOrDefaultAsync(c => c.Title == "");
+            for (int i = 2; i < 7; i++)
+            {
+
+            }
             //foreach (var item in new string[] { "ايلام", "ايوان", "آبدانان", "دره شهر", "دهلران" })
             //{
             //    _context.Add(new City { Title = item });
